@@ -39,9 +39,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 # Importing data
 movies_df = pd.read_csv('resources/data/movies.csv',sep = ',',delimiter=',')
-ratings_df = pd.read_csv('resources/data/ratings.csv')
-ratings_df.drop(['timestamp'], axis=1,inplace=True)
-train_df = pd.read_csv('resources/data/train.csv')
+#ratings_df = pd.read_csv('resources/data/ratings.csv')
+#ratings_df.drop(['timestamp'], axis=1,inplace=True)
+train_df = pd.read_csv('resources/data/ratings_train_1.csv')
 train_df.drop(['timestamp'], axis=1,inplace=True)
 
 
@@ -123,7 +123,7 @@ def collab_model(movie_list,top_n=10):
 
     indices = pd.Series(movies_df['movieId'])
     movie_ids = pred_movies(movie_list)
-    df_init_users = ratings_df[ratings_df['userId']==movie_ids[0]]
+    df_init_users = train_df[train_df['userId']==movie_ids[0]]
     for i in movie_ids :
         df_init_users=df_init_users.append(train_df[train_df['userId']==i])
     # Getting the cosine similarity matrix
